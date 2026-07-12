@@ -24,6 +24,6 @@ export default function AppRouter() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </ThemeProvider>
-    </BrowserRouter>
+    </BrowserRouter> 
   );
 }

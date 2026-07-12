@@ -7,9 +7,9 @@ export default function About() {
   return (
     <main
       className={clsx(
-        "flex min-h-screen items-center justify-center px-4 py-10 transition-colors duration-300",
+        "flex-1 px-4 py-10 transition-colors duration-300",
         theme === "light"
-          ? "bg-white text-slate-950"
+          ? "bg-gray-100 text-slate-950"
           : "bg-slate-950 text-white",
       )}
     >
@@ -18,8 +18,8 @@ export default function About() {
           className={clsx(
             "rounded-[2rem] border p-6 shadow-xl shadow-slate-900/5 sm:p-10",
             theme === "light"
-              ? "bg-white border-slate-200"
-              : "bg-slate-900 border-slate-800",
+              ? "bg-white border-slate-800"
+              : "bg-slate-900 border-slate-200",
           )}
         >
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
@@ -37,8 +37,6 @@ export default function About() {
                 dark black text in light mode.
               </p>
             </div>
-
-            
           </div>
 
           <div className="mt-8 grid gap-6">
