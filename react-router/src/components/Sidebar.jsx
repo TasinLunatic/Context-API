@@ -22,7 +22,7 @@ function MenuItems({ item,theme}) {
 export default function Sidebar() {
     const {theme} = useTheme();
 
-    const menuItems = ['Dashboard', 'Profile', 'Settings', 'Help'];
+    const menuItems = ['Dashboard', 'Profile','About', 'Settings', 'Help'];
   return (
     <aside className={clsx("w-64 p-4 transition-colors duration-300",
         theme === "light" && " bg-gray-50 text-gray-800",

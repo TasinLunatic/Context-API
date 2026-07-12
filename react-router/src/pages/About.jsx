@@ -38,16 +38,7 @@ export default function About() {
               </p>
             </div>
 
-            <button
-              onClick={toggleTheme}
-              className={clsx(
-                "px-4 py-2 rounded-lg font-medium cursor-pointer",
-                theme === "light" && "bg-gray-800 text-white hover:bg-gray-700",
-                theme === "dark" && "bg-white text-gray-800 hover:bg-gray-100",
-              )}
-            >
-              {theme === "light" ? "🌙 Dark" : "☀️ Light"}
-            </button>
+            
           </div>
 
           <div className="mt-8 grid gap-6">
