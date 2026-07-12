@@ -17,7 +17,7 @@ export default function About() {
         <div
           className={clsx(
             "rounded-[2rem] border p-6 shadow-xl shadow-slate-900/5 sm:p-10",
-            theme === "light"
+            theme === "light" 
               ? "bg-white border-slate-800"
               : "bg-slate-900 border-slate-200",
           )}
