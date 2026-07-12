@@ -14,7 +14,7 @@ export default function MainContent() {
       >
         <div className="max-w-2xl">
           <h2 className="text-3xl font-bold mb-6">
-            Welcome to bongoDev's React Context API app
+            Welcome to My React Context API app
           </h2>
           <div
             className={clsx(
