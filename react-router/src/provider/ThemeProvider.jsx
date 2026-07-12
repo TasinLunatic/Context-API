@@ -8,7 +8,7 @@ const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     setSearchParams({...searchParams, mode: theme});
-  }, [setSearchState,theme]);
+  }, [theme]);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => ( prevTheme === "light" ? "dark" : "light"));
