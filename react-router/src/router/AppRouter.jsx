@@ -16,11 +16,11 @@ export default function AppRouter() {
             <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="profile/:profileID" element={<Profile />} />
+            <Route path="about" element={<About />} />
             <Route path="settings" element={<h1>settings</h1>} />
             <Route path="help" element={<h1>Help</h1>} />
           </Route>
           <Route path="/login" element={<Login />} />
-          <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </ThemeProvider>
