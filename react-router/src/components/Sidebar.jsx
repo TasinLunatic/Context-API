@@ -1,32 +1,29 @@
 import clsx from "clsx";
 import useTheme from "../hooks/useTheme";
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 function MenuItems({ item, theme }) {
-  const navigate = useNavigate();
   return (
     <li>
-      <button
-        onClick={() => navigate(`/${item.toLowerCase()}`)}
+      <Link
+        to={`/${item.toLowerCase()}`}
         className={clsx(
-          "w-full text-left p-2 rounded hover:bg-opacity-80 transition-colors ",
-          theme === "light" && "hover:bg-gray-200",
-          theme === "dark" && "hover:bg-gray-900",
+          "block w-full text-left p-2 rounded hover:bg-opacity-80 transition-colors ",
+          theme === "light" && "hover:bg-gray-200 text-gray-800",
+          theme === "dark" && "hover:bg-gray-900 text-gray-100",
         )}
       >
         {item}
-      </button>
+      </Link>
     </li>
   );
 }
 
 function LoginButton({ theme }) {
-  const navigate = useNavigate();
-
   return (
     <li>
-      <button
-        onClick={() => navigate("/login")}
+      <Link
+        to="/login"
         className={clsx(
           "flex items-center gap-2 w-full text-left p-2 rounded transition-colors",
           theme === "light"
@@ -36,7 +33,7 @@ function LoginButton({ theme }) {
       >
         <span className="text-lg">🔐</span>
         <span>Login</span>
-      </button>
+      </Link>
     </li>
   );
 }

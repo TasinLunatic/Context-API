@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import clsx from "clsx";
 import useTheme from "../hooks/useTheme";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Login({ compact = false }) {
   const { theme } = useTheme();
+  const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -21,12 +25,11 @@ export default function Login({ compact = false }) {
       return;
     }
 
-    // Mock login logic
-    console.log("Login attempt:", { email, password });
+    login(email);
     setError("");
-    alert("Login successful! (Mock)");
     setEmail("");
     setPassword("");
+    navigate("/profile");
   };
 
   const Wrapper = compact ? "div" : "main";
