@@ -9,7 +9,7 @@ export default function MainContent() {
         className={clsx(
           "flex-1 p-8 transition-colors duration-300",
           theme === "light" && "bg-white text-gray-800",
-          theme === "dark" && "bg-gray-800 text-white"
+          theme === "dark" && "bg-slate-900 text-white"
         )}
       >
         <div className="max-w-2xl">

@@ -16,7 +16,7 @@ export default function AppRouter() {
           <Route path="/" element={<RootLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="profile/:profileID" element={<Profile />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="about" element={<About />} />
             <Route path="settings" element={<Settings />} />
             <Route path="help" element={<h1>Help</h1>} />

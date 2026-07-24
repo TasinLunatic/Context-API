@@ -7,7 +7,7 @@ export default function Header( ) {
   return (
     <header className={clsx('p-4 border-b-2 transition-colors duration-300',
         theme === "light" && "bg-white border-gray-200 text-gray-800",
-        theme === "dark" && "bg-gray-800 border-gray-600 text-white"
+        theme === "dark" && "bg-slate-900 border-gray-600 text-white"
     )}>
 
        <div className="flex justify-between items-center max-w-4xl mx-auto">

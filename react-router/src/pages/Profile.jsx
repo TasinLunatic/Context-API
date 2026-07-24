@@ -10,6 +10,9 @@ export default function Profile() {
     <div>Profile
         <p>{`Profile ID: ${profileID}`}</p>
         <p>{`Search Params :${searchParams.get("mode")}`}</p>
+        <button onClick={()=>{
+          setSearchParams({"user" :"Tasin"});
+        }}>Set user in Search Query</button>
     </div>
   )
 }

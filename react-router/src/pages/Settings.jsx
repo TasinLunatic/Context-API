@@ -22,7 +22,7 @@ export default function Settings() {
         "flex-1 px-4 py-8 transition-colors duration-300",
         theme === "light"
           ? "bg-gray-100 text-slate-950"
-          : "bg-slate-950 text-white",
+          : "bg-slate-900 text-white",
       )}
     >
       <div
