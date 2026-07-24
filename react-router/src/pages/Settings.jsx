@@ -51,6 +51,7 @@ const settingsSections = [
 
 export default function Settings() {
   const { theme } = useTheme();
+  const [activeSection, setActiveSection] = useState("Personal Information");
   const [formData, setFormData] = useState({
     fullName: "John Doe",
     email: "john@example.com",
@@ -86,43 +87,90 @@ export default function Settings() {
           </p>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
-          {settingsSections.map((section) => (
-            <section
-              key={section.title}
-              className={clsx(
-                "rounded-2xl border p-6 shadow-sm",
-                theme === "light"
-                  ? "border-slate-200 bg-white"
-                  : "border-slate-800 bg-slate-900",
-              )}
-            >
-              <div className="mb-4 flex items-center gap-3">
-                <span className="text-2xl">{section.icon}</span>
-                <div>
-                  <h2 className="text-lg font-semibold">{section.title}</h2>
-                  <p
-                    className={clsx(
-                      "text-sm",
-                      theme === "light" ? "text-slate-600" : "text-slate-300",
-                    )}
-                  >
-                    {section.description}
-                  </p>
-                </div>
-              </div>
+        <div className="grid gap-4 lg:grid-cols-[280px_minmax(0,1fr)]">
+          <div className="space-y-3">
+            {settingsSections.map((section) => {
+              const isActive = activeSection === section.title;
 
-              {section.fields ? (
-                <div className="grid gap-4">
-                  {section.fields.map((field) => (
-                    <div key={field.name}>
-                      <label className="mb-2 block text-sm font-medium">
-                        {field.label}
-                      </label>
-                      <input
-                        type={field.type}
-                        name={field.name}
-                        value={formData[field.name] ?? field.value ?? ""}
+              return (
+                <button
+                  key={section.title}
+                  type="button"
+                  onClick={() => setActiveSection(section.title)}
+                  className={clsx(
+                    "flex w-full items-center gap-3 rounded-2xl border px-4 py-3 text-left transition-colors",
+                    isActive
+                      ? theme === "light"
+                        ? "border-blue-500 bg-blue-50 text-blue-700"
+                        : "border-blue-400 bg-blue-950/40 text-blue-200"
+                      : theme === "light"
+                        ? "border-slate-200 bg-white text-slate-700"
+                        : "border-slate-800 bg-slate-900 text-slate-200",
+                  )}
+                >
+                  <span className="text-xl">{section.icon}</span>
+                  <span className="font-medium">{section.title}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <section
+            className={clsx(
+              "rounded-2xl border p-6 shadow-sm",
+              theme === "light"
+                ? "border-slate-200 bg-white"
+                : "border-slate-800 bg-slate-900",
+            )}
+          >
+            {settingsSections
+              .filter((section) => section.title === activeSection)
+              .map((section) => (
+                <div key={section.title}>
+                  <div className="mb-4 flex items-center gap-3">
+                    <span className="text-2xl">{section.icon}</span>
+                    <div>
+                      <h2 className="text-lg font-semibold">{section.title}</h2>
+                      <p
+                        className={clsx(
+                          "text-sm",
+                          theme === "light"
+                            ? "text-slate-600"
+                            : "text-slate-300",
+                        )}
+                      >
+                        {section.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {section.fields ? (
+                    <div className="grid gap-4">
+                      {section.fields.map((field) => (
+                        <div key={field.name}>
+                          <label className="mb-2 block text-sm font-medium">
+                            {field.label}
+                          </label>
+                          <input
+                            type={field.type}
+                            name={field.name}
+                            value={formData[field.name] ?? field.value ?? ""}
+                            onChange={handleChange}
+                            className={clsx(
+                              "w-full rounded-lg border px-3 py-2 text-sm outline-none",
+                              theme === "light"
+                                ? "border-slate-300 bg-white text-slate-950"
+                                : "border-slate-700 bg-slate-800 text-white",
+                              field.name === "location" &&
+                                "border-slate-300 bg-white text-slate-950",
+                            )}
+                          />
+                        </div>
+                      ))}
+                      <textarea
+                        name="bio"
+                        rows="3"
+                        value={formData.bio}
                         onChange={handleChange}
                         className={clsx(
                           "w-full rounded-lg border px-3 py-2 text-sm outline-none",
@@ -130,43 +178,30 @@ export default function Settings() {
                             ? "border-slate-300 bg-white text-slate-950"
                             : "border-slate-700 bg-slate-800 text-white",
                         )}
+                        placeholder="Write your bio"
                       />
                     </div>
-                  ))}
-                  <textarea
-                    name="bio"
-                    rows="3"
-                    value={formData.bio}
-                    onChange={handleChange}
-                    className={clsx(
-                      "w-full rounded-lg border px-3 py-2 text-sm outline-none",
-                      theme === "light"
-                        ? "border-slate-300 bg-white text-slate-950"
-                        : "border-slate-700 bg-slate-800 text-white",
-                    )}
-                    placeholder="Write your bio"
-                  />
+                  ) : (
+                    <ul className="space-y-2">
+                      {section.options.map((option) => (
+                        <li
+                          key={option}
+                          className={clsx(
+                            "flex items-center justify-between rounded-lg px-3 py-2 text-sm",
+                            theme === "light"
+                              ? "bg-slate-50 text-slate-700"
+                              : "bg-slate-800 text-slate-200",
+                          )}
+                        >
+                          <span>{option}</span>
+                          <span className="text-xs">⚙️</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-              ) : (
-                <ul className="space-y-2">
-                  {section.options.map((option) => (
-                    <li
-                      key={option}
-                      className={clsx(
-                        "flex items-center justify-between rounded-lg px-3 py-2 text-sm",
-                        theme === "light"
-                          ? "bg-slate-50 text-slate-700"
-                          : "bg-slate-800 text-slate-200",
-                      )}
-                    >
-                      <span>{option}</span>
-                      <span className="text-xs">⚙️</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </section>
-          ))}
+              ))}
+          </section>
         </div>
       </div>
     </main>
