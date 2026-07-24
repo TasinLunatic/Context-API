@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { use, useContext } from "react";
 import useTheme from "../hooks/useTheme";
 import { useNavigate } from "react-router";
 
@@ -21,6 +20,27 @@ function MenuItems({ item, theme }) {
   );
 }
 
+function LoginButton({ theme }) {
+  const navigate = useNavigate();
+
+  return (
+    <li>
+      <button
+        onClick={() => navigate("/login")}
+        className={clsx(
+          "flex items-center gap-2 w-full text-left p-2 rounded transition-colors",
+          theme === "light"
+            ? "hover:bg-gray-200 text-gray-800"
+            : "hover:bg-gray-900 text-gray-100",
+        )}
+      >
+        <span className="text-lg">🔐</span>
+        <span>Login</span>
+      </button>
+    </li>
+  );
+}
+
 export default function Sidebar() {
   const { theme } = useTheme();
 
@@ -33,14 +53,22 @@ export default function Sidebar() {
         theme === "dark" && "bg-slate-900 text-gray-100 border-gray-600",
       )}
     >
-      <nav className="">
-        <h2 className="text-lg font-semibold mb-2">Menu</h2>
-        <ul className="space-y-2">
-          {menuItems.map((item) => (
-            <MenuItems key={item} item={item} theme={theme} />
-          ))}
-        </ul>
-      </nav>
+      <div className="flex h-full flex-col">
+        <nav className="flex-1">
+          <h2 className="text-lg font-semibold mb-2">Menu</h2>
+          <ul className="space-y-2">
+            {menuItems.map((item) => (
+              <MenuItems key={item} item={item} theme={theme} />
+            ))}
+          </ul>
+        </nav>
+
+        <div className="mt-4 border-t pt-4">
+          <ul className="space-y-2">
+            <LoginButton theme={theme} />
+          </ul>
+        </div>
+      </div>
     </aside>
   );
 }
