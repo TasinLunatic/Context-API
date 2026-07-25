@@ -6,9 +6,9 @@ export default function Header( ) {
     const {theme, toggleTheme} = useTheme();
   return (
     <header className={clsx('p-4 border-b-2 transition-colors duration-300',
-        theme === "light" && "bg-white border-gray-200 text-gray-800",
-        theme === "dark" && "bg-gray-800 border-gray-600 text-white"
-    )}>
+            theme === "light" && "bg-slate-200 border-slate-200 text-slate-800",
+            theme === "dark" && "bg-slate-900 border-slate-600 text-slate-200"
+        )}>
 
        <div className="flex justify-between items-center max-w-4xl mx-auto">
         <h1 className="text-2xl font-bold">My App</h1>
