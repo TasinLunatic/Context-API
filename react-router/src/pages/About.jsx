@@ -9,7 +9,7 @@ export default function About() {
       className={clsx(
         "flex-1 px-4 py-10 transition-colors duration-300",
         theme === "light"
-          ? "bg-gray-100 text-slate-950"
+          ? "bg-gray-100 text-slate-900"
           : "bg-slate-900 text-white",
       )}
     >

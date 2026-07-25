@@ -46,8 +46,8 @@ export default function Sidebar() {
     <aside
       className={clsx(
         "w-64 p-4 transition-colors duration-300 border-r-2",
-        theme === "light" && "bg-gray-50 text-gray-800 border-gray-200",
-        theme === "dark" && "bg-slate-900 text-gray-100 border-gray-600",
+        theme === "light" && "bg-white text-gray-800",
+        theme === "dark" && "bg-slate-900 text-white",
       )}
     >
       <div className="flex h-full flex-col">
