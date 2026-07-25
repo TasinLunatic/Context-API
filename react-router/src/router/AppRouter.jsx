@@ -23,6 +23,7 @@ export default function AppRouter() {
             <Route path="/" element={<RootLayout />}>
               <Route index element={<Dashboard />} />
               <Route path="dashboard" element={<Dashboard />} />
+              <Route path="profile" element={<ProtectedProfile />} />
               <Route path="profile/:profileID" element={<ProtectedProfile />} />
               <Route path="about" element={<About />} />
               <Route path="settings" element={<Settings />} />
