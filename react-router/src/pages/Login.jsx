@@ -35,24 +35,26 @@ export default function Login() {
   return (
     <main
       className={clsx(
-        "flex-1 p-8 transition-colors duration-300 flex items-center justify-center",
-        theme === "light" && "bg-white text-gray-800",
-        theme === "dark" && "bg-gray-800 text-white",
+        "flex flex-1 items-center justify-center p-8 transition-colors duration-300",
+        theme === "light"
+          ? "bg-slate-100 text-slate-950"
+          : "bg-slate-950 text-slate-100",
       )}
     >
       <div className="w-full max-w-md">
         <div
           className={clsx(
-            "p-8 rounded-lg shadow-lg",
-            theme === "light" && "bg-gray-50 border border-gray-200",
-            theme === "dark" && "bg-gray-700 border border-gray-600",
+            "rounded-xl border p-8 shadow-lg",
+            theme === "light"
+              ? "border-slate-200 bg-white shadow-slate-200"
+              : "border-slate-800 bg-slate-900 shadow-slate-950",
           )}
         >
-          <h1 className="text-3xl font-bold mb-2 text-center">Welcome Back</h1>
+          <h1 className="mb-2 text-center text-3xl font-bold">Welcome Back</h1>
           <p
             className={clsx(
-              "text-center mb-8",
-              theme === "light" ? "text-gray-600" : "text-gray-300",
+              "mb-8 text-center",
+              theme === "light" ? "text-slate-600" : "text-slate-300",
             )}
           >
             Sign in to your account
@@ -60,7 +62,7 @@ export default function Login() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
+              <label htmlFor="email" className="mb-2 block text-sm font-medium">
                 Email Address
               </label>
               <input
@@ -70,10 +72,10 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
                 className={clsx(
-                  "w-full px-4 py-2 rounded-lg border transition-colors focus:outline-none focus:ring-2",
+                  "w-full rounded-lg border px-4 py-2 transition-colors focus:outline-none focus:ring-2",
                   theme === "light"
-                    ? "bg-white border-gray-300 focus:ring-blue-500 text-gray-800 placeholder-gray-400"
-                    : "bg-gray-600 border-gray-500 focus:ring-blue-400 text-white placeholder-gray-400",
+                    ? "border-slate-300 bg-white text-slate-950 placeholder-slate-400 focus:ring-blue-500"
+                    : "border-slate-700 bg-slate-800 text-slate-100 placeholder-slate-400 focus:ring-blue-400",
                 )}
               />
             </div>
@@ -81,7 +83,7 @@ export default function Login() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium mb-2"
+                className="mb-2 block text-sm font-medium"
               >
                 Password
               </label>
@@ -92,10 +94,10 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 className={clsx(
-                  "w-full px-4 py-2 rounded-lg border transition-colors focus:outline-none focus:ring-2",
+                  "w-full rounded-lg border px-4 py-2 transition-colors focus:outline-none focus:ring-2",
                   theme === "light"
-                    ? "bg-white border-gray-300 focus:ring-blue-500 text-gray-800 placeholder-gray-400"
-                    : "bg-gray-600 border-gray-500 focus:ring-blue-400 text-white placeholder-gray-400",
+                    ? "border-slate-300 bg-white text-slate-950 placeholder-slate-400 focus:ring-blue-500"
+                    : "border-slate-700 bg-slate-800 text-slate-100 placeholder-slate-400 focus:ring-blue-400",
                 )}
               />
             </div>
@@ -103,10 +105,10 @@ export default function Login() {
             {error && (
               <div
                 className={clsx(
-                  "p-3 rounded-lg text-sm",
+                  "rounded-lg border p-3 text-sm",
                   theme === "light"
-                    ? "bg-red-50 text-red-700 border border-red-200"
-                    : "bg-red-900/30 text-red-200 border border-red-700",
+                    ? "border-red-200 bg-red-50 text-red-700"
+                    : "border-red-700 bg-red-900/30 text-red-200",
                 )}
               >
                 {error}
@@ -116,7 +118,7 @@ export default function Login() {
             <button
               type="submit"
               className={clsx(
-                "w-full py-2 px-4 rounded-lg font-semibold transition-colors",
+                "w-full rounded-lg px-4 py-2 font-semibold transition-colors",
                 theme === "light"
                   ? "bg-blue-600 text-white hover:bg-blue-700"
                   : "bg-blue-500 text-white hover:bg-blue-600",
@@ -128,10 +130,10 @@ export default function Login() {
 
           <div
             className={clsx(
-              "mt-6 pt-6 border-t text-center text-sm",
+              "mt-6 border-t pt-6 text-center text-sm",
               theme === "light"
-                ? "border-gray-200 text-gray-600"
-                : "border-gray-600 text-gray-300",
+                ? "border-slate-200 text-slate-600"
+                : "border-slate-700 text-slate-300",
             )}
           >
             Demo credentials:

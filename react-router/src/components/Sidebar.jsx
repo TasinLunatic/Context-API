@@ -4,14 +4,16 @@ import { useNavigate } from "react-router";
 
 function MenuItems({ item, theme }) {
   const navigate = useNavigate();
+
   return (
     <li>
       <button
         onClick={() => navigate(`/${item.toLowerCase()}`)}
         className={clsx(
-          "w-full text-left p-2 rounded hover:bg-opacity-80 transition-colors ",
-          theme === "light" && "hover:bg-gray-200",
-          theme === "dark" && "hover:bg-gray-900",
+          "w-full rounded p-2 text-left transition-colors",
+          theme === "light"
+            ? "text-slate-800 hover:bg-slate-200"
+            : "text-slate-100 hover:bg-slate-800",
         )}
       >
         {item}
@@ -28,9 +30,10 @@ function LoginButton({ theme }) {
       <button
         onClick={() => navigate("/login")}
         className={clsx(
-          "w-full text-left p-2 rounded transition-colors flex items-center gap-2",
-          theme === "light" && "hover:bg-gray-200 text-gray-800",
-          theme === "dark" && "hover:bg-gray-900 text-gray-100",
+          "flex w-full items-center gap-2 rounded p-2 text-left transition-colors",
+          theme === "light"
+            ? "text-slate-800 hover:bg-slate-200"
+            : "text-slate-100 hover:bg-slate-800",
         )}
       >
         <span>🔐</span>
@@ -42,18 +45,19 @@ function LoginButton({ theme }) {
 
 export default function Sidebar() {
   const { theme } = useTheme();
-
   const menuItems = ["Dashboard", "Profile", "About", "Settings", "Help"];
+
   return (
     <aside
       className={clsx(
-        "w-64 p-4 transition-colors duration-300 flex flex-col",
-        theme === "light" && " bg-gray-50 text-gray-800",
-        theme === "dark" && "bg-gray-800 text-gray-100",
+        "flex w-64 flex-col border-r p-4 transition-colors duration-300",
+        theme === "light"
+          ? "border-slate-200 bg-slate-100 text-slate-950"
+          : "border-slate-800 bg-slate-950 text-slate-100",
       )}
     >
       <nav className="flex-1">
-        <h2 className="text-lg font-semibold mb-2">Menu</h2>
+        <h2 className="mb-2 text-lg font-semibold">Menu</h2>
         <ul className="space-y-2">
           {menuItems.map((item) => (
             <MenuItems key={item} item={item} theme={theme} />
@@ -61,7 +65,7 @@ export default function Sidebar() {
         </ul>
       </nav>
 
-      <div className="mt-4 border-t pt-4">
+      <div className="mt-4 border-t border-slate-200 pt-4 dark:border-slate-800">
         <ul className="space-y-2">
           <LoginButton theme={theme} />
         </ul>

@@ -2,24 +2,24 @@ import clsx from "clsx";
 import useTheme from "../hooks/useTheme";
 
 export default function About() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <main
       className={clsx(
         "flex-1 px-4 py-10 transition-colors duration-300",
         theme === "light"
-          ? "bg-gray-100 text-slate-950"
-          : "bg-slate-950 text-white",
+          ? "bg-slate-100 text-slate-950"
+          : "bg-slate-950 text-slate-100",
       )}
     >
       <div className="w-full max-w-5xl space-y-8">
         <div
           className={clsx(
-            "rounded-[2rem] border p-6 shadow-xl shadow-slate-900/5 sm:p-10",
-            theme === "light" 
-              ? "bg-white border-slate-800"
-              : "bg-slate-900 border-slate-200",
+            "rounded-4xl border p-6 shadow-xl sm:p-10",
+            theme === "light"
+              ? "border-slate-200 bg-white shadow-slate-200"
+              : "border-slate-800 bg-slate-900 shadow-slate-950",
           )}
         >
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
@@ -33,8 +33,8 @@ export default function About() {
                   theme === "light" ? "text-slate-700" : "text-slate-300",
                 )}
               >
-                A polished dashboard-style page with consistent theme colors and
-                dark black text in light mode.
+                A polished dashboard-style page with a consistent dark theme and
+                modern card styling across the app.
               </p>
             </div>
           </div>
@@ -44,20 +44,19 @@ export default function About() {
               className={clsx(
                 "rounded-3xl border p-6",
                 theme === "light"
-                  ? "bg-blue-50 border-blue-200"
-                  : "bg-blue-950 border-blue-700",
+                  ? "border-slate-200 bg-slate-50"
+                  : "border-slate-700 bg-slate-800",
               )}
             >
-              <h2 className="text-2xl font-semibold mb-4">Theme status</h2>
+              <h2 className="mb-4 text-2xl font-semibold">Theme status</h2>
               <p
                 className={clsx(
                   "mb-4 leading-relaxed",
                   theme === "light" ? "text-slate-950" : "text-slate-100",
                 )}
               >
-                This section matches the dashboard theme block. The same style
-                is used to show the current theme and explain how the app keeps
-                styling consistent across every page.
+                This section now follows the same dark palette as the rest of
+                the app, so the experience feels cohesive on every page.
               </p>
               <ul
                 className={clsx(
@@ -69,8 +68,8 @@ export default function About() {
                   • Current theme: <strong>{theme}</strong>
                 </li>
                 <li>• Theme works across all pages through shared context</li>
-                <li>• Light mode text appears in dark black color</li>
-                <li>• Dark mode uses the same dashboard-compatible palette</li>
+                <li>• Light mode uses dark text for readability</li>
+                <li>• Dark mode uses a deep slate palette for consistency</li>
               </ul>
             </section>
 
@@ -78,11 +77,11 @@ export default function About() {
               className={clsx(
                 "rounded-3xl border p-6",
                 theme === "light"
-                  ? "bg-green-50 border-green-200"
-                  : "bg-green-950 border-green-700",
+                  ? "border-slate-200 bg-slate-50"
+                  : "border-slate-700 bg-slate-800",
               )}
             >
-              <h2 className="text-2xl font-semibold mb-4">
+              <h2 className="mb-4 text-2xl font-semibold">
                 React Context API Demo
               </h2>
               <p
@@ -111,14 +110,14 @@ export default function About() {
               className={clsx(
                 "rounded-3xl border p-6",
                 theme === "light"
-                  ? "bg-blue-50 border-blue-200"
-                  : "bg-blue-950 border-blue-700",
+                  ? "border-slate-200 bg-slate-50"
+                  : "border-slate-700 bg-slate-800",
               )}
             >
-              <h2 className="text-2xl font-semibold mb-4">Technologies Used</h2>
+              <h2 className="mb-4 text-2xl font-semibold">Technologies Used</h2>
               <div className="grid gap-6 md:grid-cols-2">
                 <div>
-                  <h3 className="font-semibold mb-2">Frontend</h3>
+                  <h3 className="mb-2 font-semibold">Frontend</h3>
                   <ul
                     className={clsx(
                       "space-y-2 text-sm",
@@ -132,7 +131,7 @@ export default function About() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-2">Tools & Libraries</h3>
+                  <h3 className="mb-2 font-semibold">Tools & Libraries</h3>
                   <ul
                     className={clsx(
                       "space-y-2 text-sm",
@@ -152,11 +151,11 @@ export default function About() {
               className={clsx(
                 "rounded-3xl border p-6",
                 theme === "light"
-                  ? "bg-amber-50 border-amber-200"
-                  : "bg-amber-950 border-amber-700",
+                  ? "border-slate-200 bg-slate-50"
+                  : "border-slate-700 bg-slate-800",
               )}
             >
-              <h2 className="text-2xl font-semibold mb-4">Why Context API?</h2>
+              <h2 className="mb-4 text-2xl font-semibold">Why Context API?</h2>
               <p
                 className={clsx(
                   "mb-4 leading-relaxed",
@@ -173,9 +172,8 @@ export default function About() {
                   theme === "light" ? "text-slate-950" : "text-slate-100",
                 )}
               >
-                With custom hooks like `useTheme`, you get a simple, scalable
-                way to share state across the whole app without extra
-                dependencies.
+                With custom hooks like useTheme, you get a simple, scalable way
+                to share state across the whole app without extra dependencies.
               </p>
             </section>
           </div>

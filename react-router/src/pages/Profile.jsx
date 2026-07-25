@@ -20,8 +20,8 @@ export default function Profile() {
       className={clsx(
         "flex-1 p-8 transition-colors duration-300",
         theme === "light"
-          ? "bg-gray-100 text-slate-950"
-          : "bg-slate-900 text-white",
+          ? "bg-slate-100 text-slate-950"
+          : "bg-slate-950 text-slate-100",
       )}
     >
       <div
@@ -29,7 +29,7 @@ export default function Profile() {
           "mx-auto max-w-4xl rounded-4xl border p-8 shadow-xl",
           theme === "light"
             ? "border-slate-200 bg-white shadow-slate-200"
-            : "border-slate-800 bg-slate-800 shadow-slate-950",
+            : "border-slate-800 bg-slate-900 shadow-slate-950",
         )}
       >
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -64,7 +64,7 @@ export default function Profile() {
               "rounded-full px-4 py-2 text-sm font-medium",
               theme === "light"
                 ? "bg-slate-100 text-slate-700"
-                : "bg-slate-700 text-slate-200",
+                : "bg-slate-800 text-slate-200",
             )}
           >
             Active Account
@@ -77,7 +77,7 @@ export default function Profile() {
               "rounded-2xl border p-4",
               theme === "light"
                 ? "border-slate-200 bg-slate-50"
-                : "border-slate-700 bg-slate-700/50",
+                : "border-slate-700 bg-slate-800",
             )}
           >
             <p className="text-sm font-semibold">Profile ID</p>
@@ -88,7 +88,7 @@ export default function Profile() {
               "rounded-2xl border p-4",
               theme === "light"
                 ? "border-slate-200 bg-slate-50"
-                : "border-slate-700 bg-slate-700/50",
+                : "border-slate-700 bg-slate-800",
             )}
           >
             <p className="text-sm font-semibold">Current Mode</p>
@@ -97,12 +97,11 @@ export default function Profile() {
         </div>
 
         <div
-          className="mt-8 rounded-2xl border border-dashed p-6 text-sm"
           className={clsx(
             "mt-8 rounded-2xl border border-dashed p-6 text-sm",
             theme === "light"
               ? "border-slate-300 text-slate-600"
-              : "border-slate-600 text-slate-300",
+              : "border-slate-700 text-slate-300",
           )}
         >
           <p className="font-semibold">Welcome back!</p>

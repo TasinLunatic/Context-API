@@ -21,16 +21,16 @@ export default function Settings() {
       className={clsx(
         "flex-1 px-4 py-8 transition-colors duration-300",
         theme === "light"
-          ? "bg-gray-100 text-slate-950"
-          : "bg-slate-950 text-white",
+          ? "bg-slate-100 text-slate-950"
+          : "bg-slate-950 text-slate-100",
       )}
     >
       <div
         className={clsx(
-          "mx-auto max-w-4xl rounded-[2rem] border p-8 shadow-xl shadow-slate-900/5",
+          "mx-auto max-w-4xl rounded-4xl border p-8 shadow-xl",
           theme === "light"
-            ? "bg-white border-slate-200"
-            : "bg-slate-900 border-slate-800",
+            ? "border-slate-200 bg-white shadow-slate-200"
+            : "border-slate-800 bg-slate-900 shadow-slate-950",
         )}
       >
         <div className="mb-8">
@@ -60,7 +60,7 @@ export default function Settings() {
                   "w-full rounded-lg border px-4 py-2 outline-none",
                   theme === "light"
                     ? "border-slate-300 bg-white text-slate-950"
-                    : "border-slate-700 bg-slate-800 text-white",
+                    : "border-slate-700 bg-slate-800 text-slate-100",
                 )}
               />
             </div>
@@ -76,7 +76,7 @@ export default function Settings() {
                   "w-full rounded-lg border px-4 py-2 outline-none",
                   theme === "light"
                     ? "border-slate-300 bg-white text-slate-950"
-                    : "border-slate-700 bg-slate-800 text-white",
+                    : "border-slate-700 bg-slate-800 text-slate-100",
                 )}
               />
             </div>
@@ -94,7 +94,7 @@ export default function Settings() {
                   "w-full rounded-lg border px-4 py-2 outline-none",
                   theme === "light"
                     ? "border-slate-300 bg-white text-slate-950"
-                    : "border-slate-700 bg-slate-800 text-white",
+                    : "border-slate-700 bg-slate-800 text-slate-100",
                 )}
               />
             </div>
@@ -111,7 +111,7 @@ export default function Settings() {
                   "w-full rounded-lg border px-4 py-2 outline-none",
                   theme === "light"
                     ? "border-slate-300 bg-white text-slate-950"
-                    : "border-slate-700 bg-slate-800 text-white",
+                    : "border-slate-700 bg-slate-800 text-slate-100",
                 )}
                 readOnly
               />
@@ -129,7 +129,7 @@ export default function Settings() {
                 "w-full rounded-lg border px-4 py-2 outline-none",
                 theme === "light"
                   ? "border-slate-300 bg-white text-slate-950"
-                  : "border-slate-700 bg-slate-800 text-white",
+                  : "border-slate-700 bg-slate-800 text-slate-100",
               )}
             />
           </div>
@@ -140,8 +140,8 @@ export default function Settings() {
               className={clsx(
                 "rounded-lg px-4 py-2 font-medium",
                 theme === "light"
-                  ? "bg-gray-800 text-white hover:bg-gray-700"
-                  : "bg-white text-gray-800 hover:bg-gray-100",
+                  ? "bg-slate-900 text-white hover:bg-slate-700"
+                  : "bg-slate-100 text-slate-950 hover:bg-slate-200",
               )}
             >
               Save Changes

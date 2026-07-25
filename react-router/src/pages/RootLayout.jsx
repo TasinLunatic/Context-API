@@ -9,14 +9,14 @@ export default function RootLayout() {
   const { theme } = useTheme();
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <Header />
       <div
         className={clsx(
           "flex flex-1 transition-colors duration-300",
           theme === "light"
-            ? "bg-gray-100 text-slate-950"
-            : "bg-slate-900 text-white",
+            ? "bg-slate-100 text-slate-950"
+            : "bg-slate-950 text-slate-100",
         )}
       >
         <Sidebar />
