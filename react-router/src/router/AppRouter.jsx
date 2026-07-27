@@ -7,6 +7,7 @@ import Dashboard from "../pages/Dashboard";
 import Profile from "../pages/Profile";
 import ThemeProvider from "../provider/ThemeProvider";
 import Settings from "../pages/Settings";
+import Help from "../pages/Help";
 import { AuthProvider, useAuth } from "../contexts/AuthContext";
 
 function ProtectedProfile() {
@@ -27,7 +28,7 @@ export default function AppRouter() {
               <Route path="profile/:profileID" element={<ProtectedProfile />} />
               <Route path="about" element={<About />} />
               <Route path="settings" element={<Settings />} />
-              <Route path="help" element={<h1>Help</h1>} />
+              <Route path="help" element={<Help />} />
             </Route>
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
