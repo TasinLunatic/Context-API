@@ -7,177 +7,157 @@ export default function About() {
   return (
     <main
       className={clsx(
-        "flex-1 px-4 py-10 transition-colors duration-300",
+        "flex-1 px-4 py-4 transition-colors duration-300",
         theme === "light"
           ? "bg-slate-100 text-slate-950"
           : "bg-slate-950 text-slate-100",
       )}
     >
-      <div className="w-full max-w-5xl space-y-8">
-        <div
+      <div className="mx-auto flex h-full max-w-6xl flex-col gap-4">
+        <section
           className={clsx(
-            "rounded-4xl border p-6 shadow-xl sm:p-10",
+            "rounded-[24px] border p-5 shadow-lg",
             theme === "light"
               ? "border-slate-200 bg-white shadow-slate-200"
               : "border-slate-800 bg-slate-900 shadow-slate-950",
           )}
         >
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <h1 className="text-4xl font-bold tracking-tight">
-                About This App
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-500">
+                About this app
+              </p>
+              <h1 className="mt-2 text-3xl font-bold">
+                A modern React experience
               </h1>
               <p
                 className={clsx(
-                  "mt-3 max-w-2xl text-sm",
-                  theme === "light" ? "text-slate-700" : "text-slate-300",
+                  "mt-2 max-w-2xl text-sm",
+                  theme === "light" ? "text-slate-600" : "text-slate-300",
                 )}
               >
-                A polished dashboard-style page with a consistent dark theme and
-                modern card styling across the app.
+                This project brings together routing, theming, authentication,
+                and polished UI patterns in one compact dashboard.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <span className="rounded-full bg-cyan-500/10 px-3 py-1 text-sm font-medium text-cyan-500">
+                React Router
+              </span>
+              <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-sm font-medium text-emerald-500">
+                Context API
+              </span>
+              <span className="rounded-full bg-violet-500/10 px-3 py-1 text-sm font-medium text-violet-500">
+                Tailwind UI
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <div className="grid flex-1 gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+          <section
+            className={clsx(
+              "rounded-[24px] border p-5 shadow-lg",
+              theme === "light"
+                ? "border-slate-200 bg-white shadow-slate-200"
+                : "border-slate-800 bg-slate-900",
+            )}
+          >
+            <h2 className="text-xl font-semibold">What this app includes</h2>
+            <ul className="mt-3 space-y-2 text-sm">
+              <li
+                className={clsx(
+                  "rounded-lg px-3 py-2",
+                  theme === "light"
+                    ? "bg-slate-100 text-slate-950"
+                    : "bg-slate-800 text-slate-100",
+                )}
+              >
+                • Smooth page navigation with React Router
+              </li>
+              <li
+                className={clsx(
+                  "rounded-lg px-3 py-2",
+                  theme === "light"
+                    ? "bg-slate-100 text-slate-950"
+                    : "bg-slate-800 text-slate-100",
+                )}
+              >
+                • Shared theme switching across the full app
+              </li>
+              <li
+                className={clsx(
+                  "rounded-lg px-3 py-2",
+                  theme === "light"
+                    ? "bg-slate-100 text-slate-950"
+                    : "bg-slate-800 text-slate-100",
+                )}
+              >
+                • Protected routes and user-friendly pages
+              </li>
+              <li
+                className={clsx(
+                  "rounded-lg px-3 py-2",
+                  theme === "light"
+                    ? "bg-slate-100 text-slate-950"
+                    : "bg-slate-800 text-slate-100",
+                )}
+              >
+                • Clean settings and help sections for everyday use
+              </li>
+            </ul>
+          </section>
+
+          <section
+            className={clsx(
+              "rounded-[24px] border p-5 shadow-lg",
+              theme === "light"
+                ? "border-slate-200 bg-white shadow-slate-200"
+                : "border-slate-800 bg-slate-900",
+            )}
+          >
+            <h2 className="text-xl font-semibold">Why it matters</h2>
+            <p
+              className={clsx(
+                "mt-3 text-sm leading-6",
+                theme === "light" ? "text-slate-600" : "text-slate-300",
+              )}
+            >
+              Context API helps keep state simple by avoiding prop drilling,
+              while React Router makes the app feel like a real product instead
+              of a demo. This makes the structure easier to maintain and expand.
+            </p>
+            <div className="mt-4 rounded-2xl bg-cyan-500/10 p-4 text-sm text-cyan-600 dark:text-cyan-400">
+              Current theme: <span className="font-semibold">{theme}</span>
+            </div>
+          </section>
+        </div>
+
+        <section
+          className={clsx(
+            "rounded-[24px] border p-5 shadow-lg",
+            theme === "light"
+              ? "border-slate-200 bg-white shadow-slate-200"
+              : "border-slate-800 bg-slate-900",
+          )}
+        >
+          <div className="grid gap-4 md:grid-cols-3">
+            <div>
+              <p className="text-sm font-semibold text-cyan-500">Frontend</p>
+              <p className="mt-1 text-sm">React, Vite, React Router</p>
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-cyan-500">State</p>
+              <p className="mt-1 text-sm">Context API and custom hooks</p>
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-cyan-500">Style</p>
+              <p className="mt-1 text-sm">
+                Tailwind CSS with a modern card layout
               </p>
             </div>
           </div>
-
-          <div className="mt-8 grid gap-6">
-            <section
-              className={clsx(
-                "rounded-3xl border p-6",
-                theme === "light"
-                  ? "border-slate-200 bg-slate-50"
-                  : "border-slate-700 bg-slate-800",
-              )}
-            >
-              <h2 className="mb-4 text-2xl font-semibold">Theme status</h2>
-              <p
-                className={clsx(
-                  "mb-4 leading-relaxed",
-                  theme === "light" ? "text-slate-950" : "text-slate-100",
-                )}
-              >
-                This section now follows the same dark palette as the rest of
-                the app, so the experience feels cohesive on every page.
-              </p>
-              <ul
-                className={clsx(
-                  "space-y-2",
-                  theme === "light" ? "text-slate-950" : "text-slate-100",
-                )}
-              >
-                <li>
-                  • Current theme: <strong>{theme}</strong>
-                </li>
-                <li>• Theme works across all pages through shared context</li>
-                <li>• Light mode uses dark text for readability</li>
-                <li>• Dark mode uses a deep slate palette for consistency</li>
-              </ul>
-            </section>
-
-            <section
-              className={clsx(
-                "rounded-3xl border p-6",
-                theme === "light"
-                  ? "border-slate-200 bg-slate-50"
-                  : "border-slate-700 bg-slate-800",
-              )}
-            >
-              <h2 className="mb-4 text-2xl font-semibold">
-                React Context API Demo
-              </h2>
-              <p
-                className={clsx(
-                  "mb-4 leading-relaxed",
-                  theme === "light" ? "text-slate-950" : "text-slate-100",
-                )}
-              >
-                This application demonstrates the power of React's Context API
-                combined with React Router v7. It shows how to manage global
-                state without prop drilling and navigate between pages smoothly.
-              </p>
-              <p
-                className={clsx(
-                  "leading-relaxed",
-                  theme === "light" ? "text-slate-950" : "text-slate-100",
-                )}
-              >
-                Built with modern React patterns, this project illustrates best
-                practices for state management and routing in contemporary React
-                apps.
-              </p>
-            </section>
-
-            <section
-              className={clsx(
-                "rounded-3xl border p-6",
-                theme === "light"
-                  ? "border-slate-200 bg-slate-50"
-                  : "border-slate-700 bg-slate-800",
-              )}
-            >
-              <h2 className="mb-4 text-2xl font-semibold">Technologies Used</h2>
-              <div className="grid gap-6 md:grid-cols-2">
-                <div>
-                  <h3 className="mb-2 font-semibold">Frontend</h3>
-                  <ul
-                    className={clsx(
-                      "space-y-2 text-sm",
-                      theme === "light" ? "text-slate-950" : "text-slate-100",
-                    )}
-                  >
-                    <li>✓ React 19</li>
-                    <li>✓ React Router v7</li>
-                    <li>✓ Context API</li>
-                    <li>✓ Tailwind CSS</li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="mb-2 font-semibold">Tools & Libraries</h3>
-                  <ul
-                    className={clsx(
-                      "space-y-2 text-sm",
-                      theme === "light" ? "text-slate-950" : "text-slate-100",
-                    )}
-                  >
-                    <li>✓ Vite</li>
-                    <li>✓ clsx</li>
-                    <li>✓ ESLint</li>
-                    <li>✓ JavaScript</li>
-                  </ul>
-                </div>
-              </div>
-            </section>
-
-            <section
-              className={clsx(
-                "rounded-3xl border p-6",
-                theme === "light"
-                  ? "border-slate-200 bg-slate-50"
-                  : "border-slate-700 bg-slate-800",
-              )}
-            >
-              <h2 className="mb-4 text-2xl font-semibold">Why Context API?</h2>
-              <p
-                className={clsx(
-                  "mb-4 leading-relaxed",
-                  theme === "light" ? "text-slate-950" : "text-slate-100",
-                )}
-              >
-                Context API is React's built-in solution for global state
-                management. It eliminates prop drilling and makes your component
-                tree easier to maintain.
-              </p>
-              <p
-                className={clsx(
-                  "leading-relaxed",
-                  theme === "light" ? "text-slate-950" : "text-slate-100",
-                )}
-              >
-                With custom hooks like useTheme, you get a simple, scalable way
-                to share state across the whole app without extra dependencies.
-              </p>
-            </section>
-          </div>
-        </div>
+        </section>
       </div>
     </main>
   );
