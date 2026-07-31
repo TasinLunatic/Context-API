@@ -26,8 +26,8 @@ export default function Sidebar() {
     <aside
       className={clsx(
         "w-64 p-4 transition-colors duration-300 border-r-2",
-        theme === "light" && "bg-gray-50 text-gray-800 border-white",
-        theme === "dark" && "bg-gray-800 text-gray-100 border-white",
+        theme === "light" && "bg-slate-200 border-slate-200 text-slate-800",
+            theme === "dark" && "bg-slate-900 border-slate-600 text-slate-200"
       )}
     >
       <nav className="">
