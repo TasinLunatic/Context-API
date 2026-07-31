@@ -1,116 +1,91 @@
-import React from "react";
-import clsx from "clsx";
-import { Navigate, useParams } from "react-router";
-import { useSearchParams } from "react-router";
+import { Navigate, useParams, useSearchParams } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
-import useTheme from "../hooks/useTheme";
+import GlassCard from "../components/ui/GlassCard";
+import { UserIcon, GridIcon, ShieldIcon } from "../components/ui/icons";
 
 export default function Profile() {
   const { profileID } = useParams();
   const [searchParams] = useSearchParams();
   const { isAuthenticated, user } = useAuth();
-  const { theme } = useTheme();
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
 
+  const initial = user?.name?.charAt(0).toUpperCase() || "U";
+
   return (
-    <main
-      className={clsx(
-        "flex-1 p-8 transition-colors duration-300",
-        theme === "light"
-          ? "bg-slate-100 text-slate-950"
-          : "bg-slate-950 text-slate-100",
-      )}
-    >
-      <div
-        className={clsx(
-          "mx-auto max-w-4xl rounded-4xl border p-8 shadow-xl",
-          theme === "light"
-            ? "border-slate-200 bg-white shadow-slate-200"
-            : "border-slate-800 bg-slate-900 shadow-slate-950",
-        )}
-      >
+    <main className="flex-1 p-4 md:p-8">
+      <GlassCard gradient className="mx-auto max-w-4xl p-6 md:p-8 animate-fade-up">
+        {/* Avatar row */}
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
-            <div
-              className={clsx(
-                "flex h-16 w-16 items-center justify-center rounded-full text-2xl font-bold",
-                theme === "light"
-                  ? "bg-blue-100 text-blue-700"
-                  : "bg-blue-900 text-blue-100",
-              )}
-            >
-              {user?.name?.charAt(0).toUpperCase() || "U"}
+            <div className="relative">
+              <div className="rounded-full bg-linear-to-br from-cyan-400 via-blue-500 to-violet-500 p-[3px] shadow-glow-cyan">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-surface-2 text-2xl font-bold text-ink">
+                  {initial}
+                </div>
+              </div>
+              <span className="absolute -bottom-0.5 -right-0.5 flex h-4 w-4">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-4 w-4 rounded-full bg-emerald-500 shadow-glow-emerald" />
+              </span>
             </div>
             <div>
-              <h2 className="text-2xl font-bold">
+              <h2 className="font-display text-2xl font-bold text-ink">
                 {user?.name || "User Profile"}
               </h2>
-              <p
-                className={clsx(
-                  "text-sm",
-                  theme === "light" ? "text-slate-600" : "text-slate-300",
-                )}
-              >
+              <p className="text-sm text-ink-muted">
                 {user?.email || "No email available"}
               </p>
             </div>
           </div>
 
-          <div
-            className={clsx(
-              "rounded-full px-4 py-2 text-sm font-medium",
-              theme === "light"
-                ? "bg-slate-100 text-slate-700"
-                : "bg-slate-800 text-slate-200",
-            )}
-          >
+          <div className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 text-sm font-medium text-emerald-500 shadow-[0_0_16px_rgba(16,185,129,0.15)]">
             Active Account
           </div>
         </div>
 
+        {/* Info cards */}
         <div className="mt-8 grid gap-4 md:grid-cols-2">
-          <div
-            className={clsx(
-              "rounded-2xl border p-4",
-              theme === "light"
-                ? "border-slate-200 bg-slate-50"
-                : "border-slate-700 bg-slate-800",
-            )}
-          >
-            <p className="text-sm font-semibold">Profile ID</p>
-            <p className="mt-1 text-lg">{profileID ?? "guest"}</p>
+          <div className="glass-card rounded-2xl p-4">
+            <div className="mb-2 flex items-center gap-2">
+              <UserIcon className="h-4 w-4 text-cyan-500" />
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-muted">
+                Profile ID
+              </p>
+            </div>
+            <p className="font-display text-lg font-semibold text-ink">
+              {profileID ?? "guest"}
+            </p>
           </div>
-          <div
-            className={clsx(
-              "rounded-2xl border p-4",
-              theme === "light"
-                ? "border-slate-200 bg-slate-50"
-                : "border-slate-700 bg-slate-800",
-            )}
-          >
-            <p className="text-sm font-semibold">Current Mode</p>
-            <p className="mt-1 text-lg">{searchParams.get("mode") ?? "none"}</p>
+          <div className="glass-card rounded-2xl p-4">
+            <div className="mb-2 flex items-center gap-2">
+              <GridIcon className="h-4 w-4 text-violet-500" />
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-muted">
+                Current Mode
+              </p>
+            </div>
+            <p className="font-display text-lg font-semibold text-ink">
+              {searchParams.get("mode") ?? "none"}
+            </p>
           </div>
         </div>
 
-        <div
-          className={clsx(
-            "mt-8 rounded-2xl border border-dashed p-6 text-sm",
-            theme === "light"
-              ? "border-slate-300 text-slate-600"
-              : "border-slate-700 text-slate-300",
-          )}
-        >
-          <p className="font-semibold">Welcome back!</p>
-          <p className="mt-2">
-            Your account is now active. You can continue browsing the app with
-            your personalized profile information.
-          </p>
+        {/* Welcome banner */}
+        <div className="glass-card mt-8 rounded-2xl border-l-4 border-l-cyan-500 p-6">
+          <div className="flex items-start gap-3">
+            <ShieldIcon className="mt-0.5 h-5 w-5 flex-shrink-0 text-cyan-500" />
+            <div>
+              <p className="font-semibold text-ink">Welcome back!</p>
+              <p className="mt-2 text-sm text-ink-muted">
+                Your account is now active. You can continue browsing the app
+                with your personalized profile information.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+      </GlassCard>
     </main>
   );
 }

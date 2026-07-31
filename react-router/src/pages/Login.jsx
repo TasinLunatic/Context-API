@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import clsx from "clsx";
-import useTheme from "../hooks/useTheme";
 import { useAuth } from "../contexts/AuthContext";
+import GlassCard from "../components/ui/GlassCard";
+import { MailIcon, LockIcon, SparkleIcon } from "../components/ui/icons";
 
 export default function Login() {
-  const { theme } = useTheme();
   const navigate = useNavigate();
   const { login } = useAuth();
   const [email, setEmail] = useState("");
@@ -33,118 +32,85 @@ export default function Login() {
   };
 
   return (
-    <main
-      className={clsx(
-        "flex flex-1 items-center justify-center p-8 transition-colors duration-300",
-        theme === "light"
-          ? "bg-slate-100 text-slate-950"
-          : "bg-slate-950 text-slate-100",
-      )}
-    >
-      <div className="w-full max-w-md">
-        <div
-          className={clsx(
-            "rounded-xl border p-8 shadow-lg",
-            theme === "light"
-              ? "border-slate-200 bg-white shadow-slate-200"
-              : "border-slate-800 bg-slate-900 shadow-slate-950",
-          )}
-        >
-          <h1 className="mb-2 text-center text-3xl font-bold">Welcome Back</h1>
-          <p
-            className={clsx(
-              "mb-8 text-center",
-              theme === "light" ? "text-slate-600" : "text-slate-300",
-            )}
-          >
-            Sign in to your account
-          </p>
+    <main className="relative flex min-h-screen items-center justify-center p-6">
+      <GlassCard gradient className="w-full max-w-md p-8 animate-fade-up">
+        {/* Logo */}
+        <div className="mb-6 flex justify-center">
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br from-cyan-400 via-blue-500 to-violet-500 shadow-glow-cyan">
+            <SparkleIcon className="h-7 w-7 text-white" />
+          </div>
+        </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label htmlFor="email" className="mb-2 block text-sm font-medium">
-                Email Address
-              </label>
+        <h1 className="text-center font-display text-3xl font-bold text-ink">
+          Welcome Back
+        </h1>
+        <p className="mb-8 mt-2 text-center text-ink-muted">
+          Sign in to your account
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label
+              htmlFor="email"
+              className="mb-2 block text-sm font-medium text-ink"
+            >
+              Email Address
+            </label>
+            <div className="relative">
+              <MailIcon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" />
               <input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className={clsx(
-                  "w-full rounded-lg border px-4 py-2 transition-colors focus:outline-none focus:ring-2",
-                  theme === "light"
-                    ? "border-slate-300 bg-white text-slate-950 placeholder-slate-400 focus:ring-blue-500"
-                    : "border-slate-700 bg-slate-800 text-slate-100 placeholder-slate-400 focus:ring-blue-400",
-                )}
+                className="input-field pl-10"
               />
             </div>
+          </div>
 
-            <div>
-              <label
-                htmlFor="password"
-                className="mb-2 block text-sm font-medium"
-              >
-                Password
-              </label>
+          <div>
+            <label
+              htmlFor="password"
+              className="mb-2 block text-sm font-medium text-ink"
+            >
+              Password
+            </label>
+            <div className="relative">
+              <LockIcon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" />
               <input
                 id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className={clsx(
-                  "w-full rounded-lg border px-4 py-2 transition-colors focus:outline-none focus:ring-2",
-                  theme === "light"
-                    ? "border-slate-300 bg-white text-slate-950 placeholder-slate-400 focus:ring-blue-500"
-                    : "border-slate-700 bg-slate-800 text-slate-100 placeholder-slate-400 focus:ring-blue-400",
-                )}
+                className="input-field pl-10"
               />
             </div>
-
-            {error && (
-              <div
-                className={clsx(
-                  "rounded-lg border p-3 text-sm",
-                  theme === "light"
-                    ? "border-red-200 bg-red-50 text-red-700"
-                    : "border-red-700 bg-red-900/30 text-red-200",
-                )}
-              >
-                {error}
-              </div>
-            )}
-
-            <button
-              type="submit"
-              className={clsx(
-                "w-full rounded-lg px-4 py-2 font-semibold transition-colors",
-                theme === "light"
-                  ? "bg-blue-600 text-white hover:bg-blue-700"
-                  : "bg-blue-500 text-white hover:bg-blue-600",
-              )}
-            >
-              Sign In
-            </button>
-          </form>
-
-          <div
-            className={clsx(
-              "mt-6 border-t pt-6 text-center text-sm",
-              theme === "light"
-                ? "border-slate-200 text-slate-600"
-                : "border-slate-700 text-slate-300",
-            )}
-          >
-            Demo credentials:
-            <p className="mt-2 font-mono text-xs">
-              Email: demo@example.com
-              <br />
-              Password: any password
-            </p>
           </div>
+
+          {error && (
+            <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-500 shadow-[0_0_16px_rgba(239,68,68,0.12)]">
+              {error}
+            </div>
+          )}
+
+          <button type="submit" className="btn-primary w-full rounded-xl py-2.5">
+            Sign In
+          </button>
+        </form>
+
+        <div className="glass-card mt-6 rounded-2xl p-4 text-center">
+          <p className="text-xs font-medium text-ink-muted">
+            Demo credentials
+          </p>
+          <p className="mt-1.5 font-mono text-xs text-ink-muted">
+            Email: demo@example.com
+            <br />
+            Password: any password
+          </p>
         </div>
-      </div>
+      </GlassCard>
     </main>
   );
 }

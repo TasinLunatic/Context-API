@@ -1,74 +1,49 @@
 import clsx from "clsx";
-import useTheme from "../hooks/useTheme";
-import { useNavigate } from "react-router";
+import { NavLink } from "react-router";
+import { GridIcon, UserIcon, GearIcon, HelpIcon } from "./ui/icons";
 
-function MenuItems({ item, theme }) {
-  const navigate = useNavigate();
-
-  return (
-    <li>
-      <button
-        onClick={() => navigate(`/${item.toLowerCase()}`)}
-        className={clsx(
-          "w-full rounded p-2 text-left transition-colors",
-          theme === "light"
-            ? "text-slate-800 hover:bg-slate-200"
-            : "text-slate-100 hover:bg-slate-800",
-        )}
-      >
-        {item}
-      </button>
-    </li>
-  );
-}
-
-function LoginButton({ theme }) {
-  const navigate = useNavigate();
-
-  return (
-    <li>
-      <button
-        onClick={() => navigate("/login")}
-        className={clsx(
-          "flex w-full items-center gap-2 rounded p-2 text-left transition-colors",
-          theme === "light"
-            ? "text-slate-800 hover:bg-slate-200"
-            : "text-slate-100 hover:bg-slate-800",
-        )}
-      >
-        <span>🔐</span>
-        <span>Login</span>
-      </button>
-    </li>
-  );
-}
+const menuItems = [
+  { label: "Dashboard", to: "/dashboard", icon: GridIcon },
+  { label: "Profile", to: "/profile", icon: UserIcon },
+  { label: "Settings", to: "/settings", icon: GearIcon },
+  { label: "Help", to: "/help", icon: HelpIcon },
+];
 
 export default function Sidebar() {
-  const { theme } = useTheme();
-  const menuItems = ["Dashboard", "Profile", "About", "Settings", "Help"];
-
   return (
-    <aside
-      className={clsx(
-        "flex w-64 flex-col border-r p-4 transition-colors duration-300",
-        theme === "light"
-          ? "border-slate-200 bg-slate-100 text-slate-950"
-          : "border-slate-800 bg-slate-950 text-slate-100",
-      )}
-    >
-      <nav className="flex-1">
-        <h2 className="mb-2 text-lg font-semibold">Menu</h2>
-        <ul className="space-y-2">
-          {menuItems.map((item) => (
-            <MenuItems key={item} item={item} theme={theme} />
-          ))}
-        </ul>
-      </nav>
+    <aside className="sticky top-[4.25rem] flex h-[calc(100vh-4.25rem)] w-64 flex-shrink-0 flex-col border-r border-edge p-4">
+      <div className="glass-card flex flex-1 flex-col rounded-3xl p-4">
+        <p className="mb-4 text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-ink-muted">
+          Navigation
+        </p>
 
-      <div className="mt-4 border-t border-slate-200 pt-4 dark:border-slate-800">
-        <ul className="space-y-2">
-          <LoginButton theme={theme} />
-        </ul>
+        <nav className="flex-1 space-y-1">
+          {menuItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.to === "/dashboard"}
+              className={({ isActive }) =>
+                clsx("nav-item", isActive && "nav-item-active")
+              }
+            >
+              <item.icon className="h-4.5 w-4.5 flex-shrink-0" />
+              <span>{item.label}</span>
+            </NavLink>
+          ))}
+        </nav>
+
+        {/* Bottom section */}
+        <div className="mt-auto pt-4">
+          <div className="glass-card rounded-2xl p-3 text-center">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-ink-muted">
+              Nexus v1.0
+            </p>
+            <p className="mt-1 text-[0.7rem] text-ink-muted">
+              React • Router • Context
+            </p>
+          </div>
+        </div>
       </div>
     </aside>
   );

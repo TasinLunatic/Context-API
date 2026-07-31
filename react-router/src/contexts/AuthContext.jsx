@@ -29,9 +29,19 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const updateName = (name) => {
+    setUser((prev) => {
+      const updated = prev ? { ...prev, name } : { name, email: "" };
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem("auth-user", JSON.stringify(updated));
+      }
+      return updated;
+    });
+  };
+
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated: Boolean(user), login, logout }}
+      value={{ user, isAuthenticated: Boolean(user), login, logout, updateName }}
     >
       {children}
     </AuthContext.Provider>
