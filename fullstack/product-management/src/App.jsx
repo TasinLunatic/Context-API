@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import Help from "./pages/Help";
+import ProductManagement from "./pages/ProductManagement";
 import ThemeProvider from "./provider/ThemeProvider";
 import useTheme from "./hooks/useTheme";
 
@@ -17,6 +18,9 @@ function AppContent() {
     switch (activePage) {
       case "Profile":
         return <Profile />;
+      case "Products":
+      case "ProductManagement":
+        return <ProductManagement />;
       case "Settings":
         return <Settings />;
       case "Help":

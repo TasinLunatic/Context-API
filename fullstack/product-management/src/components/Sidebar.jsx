@@ -18,7 +18,7 @@ function MenuItems({ item, theme, isActive, onClick }) {
               : "border-violet-700 bg-violet-950/70 text-violet-200 shadow-sm"),
         )}
       >
-        {item}
+        {item.label}
       </button>
     </li>
   );
@@ -26,7 +26,13 @@ function MenuItems({ item, theme, isActive, onClick }) {
 
 export default function Sidebar({ activePage, onNavigate }) {
   const { theme } = useTheme();
-  const menuItems = ["Dashboard", "Profile", "Settings", "Help"];
+  const menuItems = [
+    { label: "Dashboard", path: "/dashboard" },
+    { label: "Profile", path: "/profile" },
+    { label: "Products", path: "/products" },
+    { label: "Settings", path: "/settings" },
+    { label: "Help", path: "/help" },
+  ];
 
   return (
     <aside
@@ -41,11 +47,11 @@ export default function Sidebar({ activePage, onNavigate }) {
         <ul className="space-y-2">
           {menuItems.map((item) => (
             <MenuItems
-              key={item}
+              key={item.path}
               item={item}
               theme={theme}
-              isActive={activePage === item}
-              onClick={() => onNavigate(item)}
+              isActive={activePage === item.path}
+              onClick={() => onNavigate(item.path)}
             />
           ))}
         </ul>
