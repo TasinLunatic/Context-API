@@ -14,13 +14,18 @@ export default function Settings() {
     <section className="space-y-4">
       <div
         className={clsx(
-          "rounded-xl border p-6 shadow-sm",
+          "rounded-xl border p-6 shadow-sm transition-colors duration-300",
           theme === "light"
             ? "border-slate-200 bg-white text-slate-800"
             : "border-slate-700 bg-slate-800 text-slate-100",
         )}
       >
-        <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-blue-500">
+        <p
+          className={clsx(
+            "mb-2 text-sm font-semibold uppercase tracking-wide",
+            theme === "light" ? "text-violet-600" : "text-emerald-400",
+          )}
+        >
           Settings
         </p>
         <h2 className="text-2xl font-semibold">Manage your preferences</h2>
@@ -41,7 +46,7 @@ export default function Settings() {
           <div
             key={option.label}
             className={clsx(
-              "flex items-center justify-between rounded-lg border px-4 py-3",
+              "flex items-center justify-between rounded-lg border px-4 py-3 transition-colors duration-300",
               theme === "light"
                 ? "border-slate-200 bg-white"
                 : "border-slate-700 bg-slate-800",

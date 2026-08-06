@@ -8,13 +8,14 @@ function MenuItems({ item, theme, isActive, onClick }) {
         type="button"
         onClick={onClick}
         className={clsx(
-          "w-full text-left p-2 rounded transition-colors duration-200",
-          theme === "light" && "hover:bg-gray-200",
-          theme === "dark" && "hover:bg-gray-900",
+          "w-full rounded-lg border px-3 py-2 text-left font-medium transition-all duration-200",
+          theme === "light"
+            ? "border-transparent text-slate-700 hover:border-violet-200 hover:bg-violet-50 hover:text-violet-700"
+            : "border-transparent text-slate-200 hover:border-violet-700 hover:bg-violet-950/60 hover:text-violet-200",
           isActive &&
             (theme === "light"
-              ? "bg-blue-600 text-white"
-              : "bg-blue-500 text-white"),
+              ? "border-violet-300 bg-violet-100 text-violet-800 shadow-sm"
+              : "border-violet-700 bg-violet-950/70 text-violet-200 shadow-sm"),
         )}
       >
         {item}

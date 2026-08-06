@@ -14,13 +14,18 @@ export default function Dashboard() {
     <section className="space-y-4">
       <div
         className={clsx(
-          "rounded-xl border p-6 shadow-sm",
+          "rounded-xl border p-6 shadow-sm transition-colors duration-300",
           theme === "light"
             ? "border-slate-200 bg-white text-slate-800"
             : "border-slate-700 bg-slate-800 text-slate-100",
         )}
       >
-        <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-blue-500">
+        <p
+          className={clsx(
+            "mb-2 text-sm font-semibold uppercase tracking-wide",
+            theme === "light" ? "text-violet-600" : "text-emerald-400",
+          )}
+        >
           Overview
         </p>
         <h2 className="text-2xl font-semibold">
@@ -36,10 +41,10 @@ export default function Dashboard() {
           <div
             key={card.title}
             className={clsx(
-              "rounded-xl border p-4 shadow-sm",
+              "rounded-xl border p-4 shadow-sm transition-colors duration-300",
               theme === "light"
-                ? "border-slate-200 bg-slate-50"
-                : "border-slate-700 bg-slate-900",
+                ? "border-slate-200 bg-gradient-to-br from-violet-50 to-white"
+                : "border-slate-700 bg-gradient-to-br from-violet-950/70 to-slate-900",
             )}
           >
             <p className="text-sm opacity-70">{card.title}</p>

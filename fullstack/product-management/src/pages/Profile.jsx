@@ -2,9 +2,9 @@ import clsx from "clsx";
 import useTheme from "../hooks/useTheme";
 
 const profileInfo = [
-  { label: "Name", value: "Amina Rahman" },
-  { label: "Email", value: "amina@example.com" },
-  { label: "Role", value: "Product Manager" },
+  { label: "Name", value: "Tasin" },
+  { label: "Email", value: "tasin207@gmail.com" },
+  { label: "Role", value: "Developer" },
 ];
 
 export default function Profile() {
@@ -14,13 +14,18 @@ export default function Profile() {
     <section className="space-y-4">
       <div
         className={clsx(
-          "rounded-xl border p-6 shadow-sm",
+          "rounded-xl border p-6 shadow-sm transition-colors duration-300",
           theme === "light"
             ? "border-slate-200 bg-white text-slate-800"
             : "border-slate-700 bg-slate-800 text-slate-100",
         )}
       >
-        <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-blue-500">
+        <p
+          className={clsx(
+            "mb-2 text-sm font-semibold uppercase tracking-wide",
+            theme === "light" ? "text-violet-600" : "text-emerald-400",
+          )}
+        >
           Profile
         </p>
         <h2 className="text-2xl font-semibold">Your profile</h2>
@@ -38,12 +43,17 @@ export default function Profile() {
         )}
       >
         <div className="flex items-center gap-4">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-500 text-xl font-semibold text-white">
-            AR
+          <div
+            className={clsx(
+              "flex h-14 w-14 items-center justify-center rounded-full text-xl font-semibold text-white",
+              theme === "light" ? "bg-violet-600" : "bg-emerald-500",
+            )}
+          >
+            TA
           </div>
           <div>
-            <h3 className="text-lg font-semibold">Amina Rahman</h3>
-            <p className="text-sm opacity-70">Product manager at Studio App</p>
+            <h3 className="text-lg font-semibold">Tasin</h3>
+            <p className="text-sm opacity-70">Developer at Studio App</p>
           </div>
         </div>
 
@@ -52,7 +62,7 @@ export default function Profile() {
             <div
               key={item.label}
               className={clsx(
-                "rounded-lg border p-3",
+                "rounded-lg border p-3 transition-colors duration-300",
                 theme === "light"
                   ? "border-slate-200 bg-white"
                   : "border-slate-700 bg-slate-800",
