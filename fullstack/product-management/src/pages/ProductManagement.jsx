@@ -37,6 +37,10 @@ export default function ProductManagement() {
     return products.reduce((acc, product) => acc + product.price, 0);
   }, [products]);
 
+  const getItemCount = (product) => {
+    return product.items ?? product.quantity ?? product.stock ?? 0;
+  };
+
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
@@ -136,22 +140,49 @@ export default function ProductManagement() {
                 <div
                   key={product.name}
                   className={clsx(
-                    "rounded-lg shadow-md hover:shadow-lg transition-all duration-300 p-6 border-t-4 border-violet-500",
+                    "rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border-[3px] border-violet-500",
                     theme === "light" && "bg-white text-gray-800",
                     theme === "dark" &&
                       "bg-gray-800 text-white shadow-gray-900 hover:shadow-gray-700",
                   )}
                 >
-                  <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                  <p
-                    className={clsx(
-                      "font-bold text-xl",
-                      theme === "light" && "text-violet-600",
-                      theme === "dark" && "text-violet-400",
-                    )}
-                  >
-                    ${product.price?.toFixed(2)}
-                  </p>
+                  <div className="flex items-start justify-between gap-5">
+                    <div className="flex-1 pr-3 text-left">
+                      <h3 className="text-lg font-semibold mb-2">
+                        {product.name}
+                      </h3>
+                      <p
+                        className={clsx(
+                          "text-sm leading-relaxed",
+                          theme === "light" && "text-gray-600",
+                          theme === "dark" && "text-gray-300",
+                        )}
+                      >
+                        {product.description ?? "No description available."}
+                      </p>
+                    </div>
+
+                    <div className="flex min-w-[120px] flex-col items-end text-right">
+                      <p
+                        className={clsx(
+                          "font-bold text-2xl leading-none",
+                          theme === "light" && "text-violet-600",
+                          theme === "dark" && "text-violet-400",
+                        )}
+                      >
+                        ${product.price?.toFixed(2)}
+                      </p>
+                      <p
+                        className={clsx(
+                          "text-sm mt-2 font-medium",
+                          theme === "light" && "text-gray-600",
+                          theme === "dark" && "text-gray-300",
+                        )}
+                      >
+                        {getItemCount(product)} items
+                      </p>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -173,17 +204,33 @@ export default function ProductManagement() {
         {/* Total Price Section */}
         <div
           className={clsx(
-            "rounded-lg shadow-lg p-8 text-center transition-colors duration-300",
+            "rounded-xl shadow-lg p-8 transition-colors duration-300 border-[4px] border-white/30",
             theme === "light" &&
               "bg-gradient-to-r from-violet-600 to-purple-600 text-white",
             theme === "dark" &&
               "bg-gradient-to-r from-violet-700 to-purple-800 text-white",
           )}
         >
-          <p className="text-sm font-semibold uppercase tracking-wide mb-2">
-            Total Inventory Value
-          </p>
-          <p className="text-5xl font-bold">${totalPrice.toFixed(2)}</p>
+          <div className="flex items-center justify-between gap-6">
+            <div className="text-left">
+              <p className="text-2xl font-semibold tracking-wide">
+                Total Inventory Value
+              </p>
+            </div>
+
+            <div className="text-right">
+              <p className="text-3xl font-bold">${totalPrice.toFixed(2)}</p>
+              <p className="text-sm mt-2 font-medium opacity-90">
+                {products.reduce(
+                  (acc, product) =>
+                    acc +
+                    (product.items ?? product.quantity ?? product.stock ?? 0),
+                  0,
+                )}{" "}
+                items
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
