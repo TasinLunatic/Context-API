@@ -7,15 +7,19 @@ import clsx from "clsx";
 export default function ProductManagement() {
   const { theme } = useTheme();
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
 
   const getProducts = useCallback(async () => {
+    setLoading(true);
     try {
       const products = await productService.getProducts();
       setProducts(products);
     } catch (err) {
       console.log(err);
       alert("Error fetching data");
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -50,9 +54,9 @@ export default function ProductManagement() {
       className={clsx(
         "min-h-screen p-8 transition-colors duration-300",
         theme === "light" &&
-          "bg-gradient-to-br from-violet-50 to-violet-100 text-gray-800",
+          "bg-linear-to-br from-violet-50 to-violet-100 text-gray-800",
         theme === "dark" &&
-          "bg-gradient-to-br from-slate-900 to-slate-800 text-white",
+          "bg-linear-to-br from-slate-900 to-slate-800 text-white",
       )}
     >
       <div className="max-w-6xl mx-auto">
@@ -132,8 +136,9 @@ export default function ProductManagement() {
               theme === "dark" && "text-white",
             )}
           >
-            Products
+            Products ({products.length})
           </h2>
+          {loading && <h2>Loading...</h2>}
           {products.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {products.map((product) => (
