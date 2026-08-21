@@ -1,53 +1,20 @@
-import { useCallback, useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import { productService } from "../api/services";
 import useTheme from "../hooks/useTheme";
+import useProducts from "../hooks/useProducts";
 import clsx from "clsx";
 
 export default function ProductManagement() {
   const { theme } = useTheme();
-  const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [products, setProducts] = useState([]);
-
-  const getProducts = useCallback(async () => {
-    setLoading(true);
-    try {
-      const products = await productService.getProducts();
-      setProducts(products);
-    } catch (err) {
-      console.log(err);
-      alert("Error fetching data");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    getProducts();
-  }, [getProducts]);
-
-  const getProductByName = useCallback(
-    (name) => {
-      const product = products.find((product) =>
-        new RegExp(name, "i").test(product.name),
-      );
-      return product ? product.name : "product not found";
-    },
-    [products],
-  );
-
-  const totalPrice = useMemo(() => {
-    return products.reduce((acc, product) => acc + product.price, 0);
-  }, [products]);
-
-  const getItemCount = (product) => {
-    return product.items ?? product.quantity ?? product.stock ?? 0;
-  };
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  };
+  const {
+    products,
+    loading,
+    error,
+    search,
+    getItemCount,
+    getProductByName,
+    totalPrice,
+    handleProductSearch,
+  } = useProducts();
 
   return (
     <div
@@ -94,7 +61,7 @@ export default function ProductManagement() {
             type="text"
             placeholder="Search by product name..."
             value={search}
-            onChange={handleSearch}
+            onChange={handleProductSearch}
             className={clsx(
               "w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 transition",
               theme === "light" &&
@@ -138,8 +105,11 @@ export default function ProductManagement() {
           >
             Products ({products.length})
           </h2>
-          {loading && <h2>Loading...</h2>}
-          {products.length > 0 ? (
+          {loading ? (
+            <h2 className="text-2xl font-semibold">Loading...</h2>
+          ) : error ? (
+            <h2 className="text-red-500">{error}</h2>
+          ) : products.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {products.map((product) => (
                 <div
@@ -226,13 +196,7 @@ export default function ProductManagement() {
             <div className="text-right">
               <p className="text-3xl font-bold">${totalPrice.toFixed(2)}</p>
               <p className="text-sm mt-2 font-medium opacity-90">
-                {products.reduce(
-                  (acc, product) =>
-                    acc +
-                    (product.items ?? product.quantity ?? product.stock ?? 0),
-                  0,
-                )}{" "}
-                items
+                {products.length} items
               </p>
             </div>
           </div>
