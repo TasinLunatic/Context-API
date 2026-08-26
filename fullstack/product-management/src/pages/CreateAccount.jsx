@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import useTheme from "../hooks/useTheme";
 import { useAuth } from "../contexts/AuthContext";
@@ -13,6 +13,27 @@ export default function CreateAccount() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [visiblePassword, setVisiblePassword] = useState("");
+  const visibilityTimers = useRef({});
+
+  useEffect(() => {
+    return () => {
+      Object.values(visibilityTimers.current).forEach(clearTimeout);
+    };
+  }, []);
+
+  const togglePasswordVisibility = (field) => {
+    const isVisible = visiblePassword === field;
+
+    clearTimeout(visibilityTimers.current[field]);
+    setVisiblePassword(isVisible ? "" : field);
+
+    if (!isVisible) {
+      visibilityTimers.current[field] = setTimeout(() => {
+        setVisiblePassword("");
+      }, 3000);
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -108,30 +129,62 @@ export default function CreateAccount() {
 
           <label className="block text-sm font-medium">
             Password
-            <input
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="At least 6 characters"
-              required
-              minLength={6}
-              autoComplete="new-password"
-              className={inputClassName}
-            />
+            <div className="relative">
+              <input
+                type={visiblePassword === "password" ? "text" : "password"}
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder="At least 6 characters with special characters"
+                required
+                minLength={6}
+                autoComplete="new-password"
+                className={clsx(inputClassName, "pr-12")}
+              />
+              <button
+                type="button"
+                onClick={() => togglePasswordVisibility("password")}
+                aria-label={
+                  visiblePassword === "password"
+                    ? "Hide password"
+                    : "Show password"
+                }
+                title="Show password for 3 seconds"
+                className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer p-1 text-lg opacity-70 transition hover:opacity-100"
+              >
+                {visiblePassword === "password" ? "🙈" : "👁"}
+              </button>
+            </div>
           </label>
 
           <label className="block text-sm font-medium">
             Confirm password
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(event) => setConfirmPassword(event.target.value)}
-              placeholder="Repeat your password"
-              required
-              minLength={6}
-              autoComplete="new-password"
-              className={inputClassName}
-            />
+            <div className="relative">
+              <input
+                type={
+                  visiblePassword === "confirmPassword" ? "text" : "password"
+                }
+                value={confirmPassword}
+                onChange={(event) => setConfirmPassword(event.target.value)}
+                placeholder="Repeat your password"
+                required
+                minLength={6}
+                autoComplete="new-password"
+                className={clsx(inputClassName, "pr-12")}
+              />
+              <button
+                type="button"
+                onClick={() => togglePasswordVisibility("confirmPassword")}
+                aria-label={
+                  visiblePassword === "confirmPassword"
+                    ? "Hide confirmed password"
+                    : "Show confirmed password"
+                }
+                title="Show password for 3 seconds"
+                className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer p-1 text-lg opacity-70 transition hover:opacity-100"
+              >
+                {visiblePassword === "confirmPassword" ? "🙈" : "👁"}
+              </button>
+            </div>
           </label>
 
           {passwordError && (
