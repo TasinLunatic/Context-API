@@ -4,18 +4,34 @@ import { Link, useNavigate } from "react-router";
 import useTheme from "../hooks/useTheme";
 import { useAuth } from "../contexts/AuthContext";
 
-export default function Login() {
+export default function CreateAccount() {
   const { theme, toggleTheme } = useTheme();
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    login(email);
+    if (password !== confirmPassword) {
+      setPasswordError("Passwords do not match.");
+      return;
+    }
+
+    setPasswordError("");
+    login(email, name);
     navigate("/dashboard");
   };
+
+  const inputClassName = clsx(
+    "mt-2 w-full rounded-lg border px-4 py-3 outline-none transition focus:ring-2",
+    theme === "light"
+      ? "border-slate-300 bg-slate-50 focus:border-violet-500 focus:ring-violet-200"
+      : "border-slate-600 bg-slate-900 focus:border-emerald-400 focus:ring-emerald-400/30",
+  );
 
   return (
     <div
@@ -55,15 +71,28 @@ export default function Login() {
               theme === "light" ? "text-violet-600" : "text-emerald-400",
             )}
           >
-            Welcome back
+            Get started
           </p>
-          <h1 className="text-3xl font-bold">Sign in to your account</h1>
+          <h1 className="text-3xl font-bold">Create your account</h1>
           <p className="mt-2 text-sm opacity-70">
-            Access your dashboard and manage your workspace.
+            Set up your account to access the workspace.
           </p>
         </div>
 
         <div className="space-y-5">
+          <label className="block text-sm font-medium">
+            Full name
+            <input
+              type="text"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              placeholder="Your name"
+              required
+              autoComplete="name"
+              className={inputClassName}
+            />
+          </label>
+
           <label className="block text-sm font-medium">
             Email address
             <input
@@ -73,12 +102,7 @@ export default function Login() {
               placeholder="you@example.com"
               required
               autoComplete="email"
-              className={clsx(
-                "mt-2 w-full rounded-lg border px-4 py-3 outline-none transition focus:ring-2",
-                theme === "light"
-                  ? "border-slate-300 bg-slate-50 focus:border-violet-500 focus:ring-violet-200"
-                  : "border-slate-600 bg-slate-900 focus:border-emerald-400 focus:ring-emerald-400/30",
-              )}
+              className={inputClassName}
             />
           </label>
 
@@ -88,42 +112,55 @@ export default function Login() {
               type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              placeholder="Enter your password"
+              placeholder="At least 6 characters"
               required
               minLength={6}
-              autoComplete="current-password"
-              className={clsx(
-                "mt-2 w-full rounded-lg border px-4 py-3 outline-none transition focus:ring-2",
-                theme === "light"
-                  ? "border-slate-300 bg-slate-50 focus:border-violet-500 focus:ring-violet-200"
-                  : "border-slate-600 bg-slate-900 focus:border-emerald-400 focus:ring-emerald-400/30",
-              )}
+              autoComplete="new-password"
+              className={inputClassName}
             />
           </label>
+
+          <label className="block text-sm font-medium">
+            Confirm password
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(event) => setConfirmPassword(event.target.value)}
+              placeholder="Repeat your password"
+              required
+              minLength={6}
+              autoComplete="new-password"
+              className={inputClassName}
+            />
+          </label>
+
+          {passwordError && (
+            <p className="text-sm font-medium text-red-500">{passwordError}</p>
+          )}
         </div>
 
         <button
           type="submit"
           className={clsx(
-            "mt-7 w-full rounded-lg px-4 py-3 font-semibold shadow-sm cursor-pointer transition hover:-translate-y-0.5 hover:shadow-md",
+            "mt-7 w-full rounded-lg px-4 py-3 font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md",
             theme === "light"
               ? "bg-violet-600 text-white hover:bg-violet-700"
               : "bg-emerald-500 text-slate-950 hover:bg-emerald-400",
           )}
         >
-          Sign in
+          Create account
         </button>
 
         <p className="mt-6 text-center text-sm opacity-75">
-          New to the workspace?{" "}
+          Already have an account?{" "}
           <Link
-            to="/create-account"
+            to="/login"
             className={clsx(
               "font-semibold underline-offset-4 hover:underline",
               theme === "light" ? "text-violet-600" : "text-emerald-400",
             )}
           >
-            Create an account
+            Sign in
           </Link>
         </p>
       </form>

@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import {
   About,
   Login,
+  CreateAccount,
   NotFound,
   Settings,
   RootLayout,
@@ -35,6 +36,7 @@ export default function AppRouter() {
               <Route path="help" element={<Help />} />
             </Route>
             <Route path="/login" element={<Login />} />
+            <Route path="/create-account" element={<CreateAccount />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ThemeProvider>

@@ -9,8 +9,8 @@ export function AuthProvider({ children }) {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  const login = (email) => {
-    const name = email.split("@")[0];
+  const login = (email, providedName) => {
+    const name = providedName || email.split("@")[0];
     const userData = {
       email,
       name: name.charAt(0).toUpperCase() + name.slice(1),
@@ -41,7 +41,13 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated: Boolean(user), login, logout, updateName }}
+      value={{
+        user,
+        isAuthenticated: Boolean(user),
+        login,
+        logout,
+        updateName,
+      }}
     >
       {children}
     </AuthContext.Provider>
