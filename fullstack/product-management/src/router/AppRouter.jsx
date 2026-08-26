@@ -1,13 +1,16 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
-import About from "../pages/About";
-import Login from "../pages/Login";
-import NotFound from "../pages/NotFound";
-import RootLayout from "../pages/RootLayout";
-import Dashboard from "../pages/Dashboard";
-import Profile from "../pages/Profile";
+import {
+  About,
+  Login,
+  NotFound,
+  Settings,
+  RootLayout,
+  Dashboard,
+  Profile,
+  ProductManagement,
+  Help,
+} from "../pages";
 import ThemeProvider from "../provider/ThemeProvider";
-import Settings from "../pages/Settings";
-import Help from "../pages/Help";
 import { AuthProvider, useAuth } from "../contexts/AuthContext";
 
 function ProtectedProfile() {
@@ -25,6 +28,7 @@ export default function AppRouter() {
               <Route index element={<Dashboard />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="profile" element={<ProtectedProfile />} />
+              <Route path="products" element={<ProductManagement />} />
               <Route path="profile/:profileID" element={<ProtectedProfile />} />
               <Route path="about" element={<About />} />
               <Route path="settings" element={<Settings />} />
