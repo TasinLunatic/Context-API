@@ -21,7 +21,7 @@ export default function Header() {
         theme === "dark" && "bg-slate-900 border-slate-600 text-slate-200",
       )}
     >
-      <div className="flex justify-between items-center max-w-4xl mx-auto">
+      <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">My App</h1>
         <div className="flex items-center gap-4">
           <span className="">Welcome, Guest!</span>
