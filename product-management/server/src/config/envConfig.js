@@ -1,0 +1,6 @@
+const envConfig = {
+    PORT: 5000,
+    ALLOWED_ORIGINS: 'http://localhost:3009',
+};
+
+export default envConfig;
