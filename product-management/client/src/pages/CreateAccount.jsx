@@ -1,0 +1,222 @@
+import clsx from "clsx";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router";
+import useTheme from "../hooks/useTheme";
+import { useAuth } from "../contexts/AuthContext";
+
+export default function CreateAccount() {
+  const { theme, toggleTheme } = useTheme();
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [visiblePassword, setVisiblePassword] = useState("");
+  const visibilityTimers = useRef({});
+
+  useEffect(() => {
+    return () => {
+      Object.values(visibilityTimers.current).forEach(clearTimeout);
+    };
+  }, []);
+
+  const togglePasswordVisibility = (field) => {
+    const isVisible = visiblePassword === field;
+
+    clearTimeout(visibilityTimers.current[field]);
+    setVisiblePassword(isVisible ? "" : field);
+
+    if (!isVisible) {
+      visibilityTimers.current[field] = setTimeout(() => {
+        setVisiblePassword("");
+      }, 3000);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (password !== confirmPassword) {
+      setPasswordError("Passwords do not match.");
+      return;
+    }
+
+    setPasswordError("");
+    login(email, name);
+    navigate("/dashboard");
+  };
+
+  const inputClassName = clsx(
+    "mt-2 w-full rounded-lg border px-4 py-3 outline-none transition focus:ring-2",
+    theme === "light"
+      ? "border-slate-300 bg-slate-50 focus:border-violet-500 focus:ring-violet-200"
+      : "border-slate-600 bg-slate-900 focus:border-emerald-400 focus:ring-emerald-400/30",
+  );
+
+  return (
+    <div
+      className={clsx(
+        "relative flex min-h-screen items-center justify-center px-4 py-8 transition-colors duration-300",
+        theme === "light"
+          ? "bg-gradient-to-br from-violet-50 via-white to-slate-100 text-slate-800"
+          : "bg-gradient-to-br from-slate-950 via-slate-900 to-violet-950 text-slate-100",
+      )}
+    >
+      <button
+        type="button"
+        onClick={toggleTheme}
+        className={clsx(
+          "absolute right-4 top-4 rounded-lg px-4 py-2 font-medium transition-colors duration-300",
+          theme === "light"
+            ? "bg-gray-800 text-white hover:bg-gray-700"
+            : "bg-white text-gray-800 hover:bg-gray-100",
+        )}
+      >
+        {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+      </button>
+
+      <form
+        onSubmit={handleSubmit}
+        className={clsx(
+          "w-full max-w-md rounded-xl border p-8 shadow-xl",
+          theme === "light"
+            ? "border-slate-200 bg-white"
+            : "border-slate-700 bg-slate-800",
+        )}
+      >
+        <div className="mb-8">
+          <p
+            className={clsx(
+              "mb-2 text-sm font-semibold uppercase tracking-wide",
+              theme === "light" ? "text-violet-600" : "text-emerald-400",
+            )}
+          >
+            Get started
+          </p>
+          <h1 className="text-3xl font-bold">Create your account</h1>
+          <p className="mt-2 text-sm opacity-70">
+            Set up your account to access the workspace.
+          </p>
+        </div>
+
+        <div className="space-y-5">
+          <label className="block text-sm font-medium">
+            Full name
+            <input
+              type="text"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              placeholder="Your name"
+              required
+              autoComplete="name"
+              className={inputClassName}
+            />
+          </label>
+
+          <label className="block text-sm font-medium">
+            Email address
+            <input
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              placeholder="you@example.com"
+              required
+              autoComplete="email"
+              className={inputClassName}
+            />
+          </label>
+
+          <label className="block text-sm font-medium">
+            Password
+            <div className="relative">
+              <input
+                type={visiblePassword === "password" ? "text" : "password"}
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                placeholder="At least 6 characters with special characters"
+                required
+                minLength={6}
+                autoComplete="new-password"
+                className={clsx(inputClassName, "pr-12")}
+              />
+              <button
+                type="button"
+                onClick={() => togglePasswordVisibility("password")}
+                aria-label={
+                  visiblePassword === "password"
+                    ? "Hide password"
+                    : "Show password"
+                }
+                title="Show password for 3 seconds"
+                className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer p-1 text-lg opacity-70 transition hover:opacity-100"
+              >
+                {visiblePassword === "password" ? "🙈" : "👁"}
+              </button>
+            </div>
+          </label>
+
+          <label className="block text-sm font-medium">
+            Confirm password
+            <div className="relative">
+              <input
+                type={
+                  visiblePassword === "confirmPassword" ? "text" : "password"
+                }
+                value={confirmPassword}
+                onChange={(event) => setConfirmPassword(event.target.value)}
+                placeholder="Repeat your password"
+                required
+                minLength={6}
+                autoComplete="new-password"
+                className={clsx(inputClassName, "pr-12")}
+              />
+              <button
+                type="button"
+                onClick={() => togglePasswordVisibility("confirmPassword")}
+                aria-label={
+                  visiblePassword === "confirmPassword"
+                    ? "Hide confirmed password"
+                    : "Show confirmed password"
+                }
+                title="Show password for 3 seconds"
+                className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer p-1 text-lg opacity-70 transition hover:opacity-100"
+              >
+                {visiblePassword === "confirmPassword" ? "🙈" : "👁"}
+              </button>
+            </div>
+          </label>
+
+          {passwordError && (
+            <p className="text-sm font-medium text-red-500">{passwordError}</p>
+          )}
+        </div>
+
+        <button
+          type="submit"
+          className={clsx(
+            "mt-7 w-full rounded-lg px-4 py-3 font-semibold shadow-sm transition hover:-translate-y-0.5 hover:shadow-md",
+            theme === "light"
+              ? "bg-violet-600 text-white hover:bg-violet-700"
+              : "bg-emerald-500 text-slate-950 hover:bg-emerald-400",
+          )}
+        >
+          Create account
+        </button>
+
+        <p className="mt-6 text-center text-sm opacity-75">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className={clsx(
+              "font-semibold underline-offset-4 hover:underline",
+              theme === "light" ? "text-violet-600" : "text-emerald-400",
+            )}
+          >
+            Sign in
+          </Link>
+        </p>
+      </form>
+    </div>
+  );
+}
