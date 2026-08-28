@@ -3,7 +3,7 @@ import axios from "axios";
 export const getProducts = async () => {
   try {
     const response = await axios.get(
-      "https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json",
+      "http://localhost:5000/api/products",
     );
     return response.data;
   } catch (error) {
