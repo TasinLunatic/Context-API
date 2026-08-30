@@ -1,22 +1,19 @@
-import {Router} from'express';
+import { Router } from "express";
+import {
+  createProduct,
+  getAllProducts,
+  getProductById,
+  updateProduct,
+  deleteProduct,
+} from "../controllers/products.js";
 import {mockProducts} from '../mockdata.js'
-import {RouteNotImplementedError} from '../error/index.js'
 
 const productRouter = Router();
 
-productRouter.post('/', (req, res) => {
-    throw new RouteNotImplementedError();
-});
-
-productRouter.get('/', (req, res) => {
-  res.status(200).json(mockProducts)
-});
-
-
-productRouter.get('/:productId', (req, res) => {
-  console.log(req.params)
-  const {productId} = req.params;
-  res.json({message:`Product Id: ${productId}`});
-})
+productRouter.post("/", createProduct);
+productRouter.get("/", getAllProducts);
+productRouter.get("/:productId", getProductById);
+productRouter.put("/:productId", updateProduct);
+productRouter.delete("/:productId", deleteProduct);
 
 export default productRouter;
